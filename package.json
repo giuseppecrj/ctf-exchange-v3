@@ -1,0 +1,25 @@
+{
+  "name": "forge-template-base",
+  "version": "1.0.0",
+  "author": "g <5714678+giuseppecrj@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf cache out coverage lcov.info",
+    "build": "forge build",
+    "lint": "yarn run lint:sol && yarn run prettier:check",
+    "lint:sol": "forge fmt --check && yarn solhint -f table {script,src,test}/**/*.sol",
+    "prettier:check": "prettier --check \"**/*.{json,md,yml}\" --ignore-path \".prettierignore\"",
+    "prettier:write": "prettier --write \"**/*.{json,md,yml}\" --ignore-path \".prettierignore\"",
+    "test": "forge test",
+    "test:coverage": "forge coverage --no-match-coverage '(test|scripts)'",
+    "test:coverage:report": "forge coverage --no-match-coverage '(test|scripts)' --report lcov && genhtml lcov.info --branch-coverage --output-dir coverage --rc derive_function_end_line=0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2"
+  },
+  "devDependencies": {
+    "forge-std": "github:foundry-rs/forge-std#v1.8.1",
+    "prettier": "^3.0.0",
+    "solhint": "^3.6.2"
+  }
+}
