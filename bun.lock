@@ -6,6 +6,7 @@
       "name": "forge-template-base",
       "dependencies": {
         "@openzeppelin/contracts": "^5.0.2",
+        "@towns-protocol/diamond": "^0.7.0",
         "solady": "^0.1.26",
       },
       "devDependencies": {
@@ -24,7 +25,11 @@
 
     "@openzeppelin/contracts": ["@openzeppelin/contracts@5.0.2", "", {}, "sha512-ytPc6eLGcHHnapAZ9S+5qsdomhjo6QBHTDRRBFfTxXIpsicMhVPouPgmUPebZZZGX7vt9USA+Z+0M0dSVtSUEA=="],
 
+    "@prb/test": ["@prb/test@0.6.4", "", {}, "sha512-P0tTMsB6XQ0Wp61EYdXJYFhsOVGyZvcOFub2y9yk0sF+GYDusctR7DzEI+vOP0SILm3knFkEJASjewHEBppdRQ=="],
+
     "@solidity-parser/parser": ["@solidity-parser/parser@0.16.2", "", { "dependencies": { "antlr4ts": "^0.5.0-alpha.4" } }, "sha512-PI9NfoA3P8XK2VBkK5oIfRgKDsicwDZfkVq9ZTBCQYGOP1N2owgY2dyLGyU5/J/hQs8KRk55kdmvTLjy3Mu3vg=="],
+
+    "@towns-protocol/diamond": ["@towns-protocol/diamond@0.7.0", "", { "dependencies": { "@openzeppelin/contracts": "^5.4.0", "@prb/test": "^0.6.4", "forge-std": "github:foundry-rs/forge-std#v1.12.0", "solady": "^0.1.26" } }, "sha512-B+fPuRoDlDmp7mLf9n3BJsWAsY/e3Qph5/7V9+Cp7FjJIpFGw4H7jPCLapLZ6eGLVjbDSHjcuMQCAIlFSo7npQ=="],
 
     "ajv": ["ajv@6.12.6", "", { "dependencies": { "fast-deep-equal": "^3.1.1", "fast-json-stable-stringify": "^2.0.0", "json-schema-traverse": "^0.4.1", "uri-js": "^4.2.2" } }, "sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g=="],
 
@@ -151,6 +156,10 @@
     "wrappy": ["wrappy@1.0.2", "", {}, "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ=="],
 
     "@babel/highlight/chalk": ["chalk@2.4.2", "", { "dependencies": { "ansi-styles": "^3.2.1", "escape-string-regexp": "^1.0.5", "supports-color": "^5.3.0" } }, "sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ=="],
+
+    "@towns-protocol/diamond/@openzeppelin/contracts": ["@openzeppelin/contracts@5.6.1", "", {}, "sha512-Ly6SlsVJ3mj+b18W3R8gNufB7dTICT105fJhodGAGgyC2oqnBAhqSiNDJ8V8DLY05cCz81GLI0CU5vNYA1EC/w=="],
+
+    "@towns-protocol/diamond/forge-std": ["forge-std@github:foundry-rs/forge-std#7117c90", {}, "foundry-rs-forge-std-7117c90", "sha512-eQrO4RWEPaPXU2p6XArymYp0ciogMenCwPZly9oZlUjc3Vsq3eVLX166igIT3+IJHXhHun8mEgBfASAV5fjIYw=="],
 
     "solhint/prettier": ["prettier@2.8.8", "", { "bin": { "prettier": "bin-prettier.js" } }, "sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q=="],
 

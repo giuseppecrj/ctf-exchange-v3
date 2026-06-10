@@ -1,5 +1,4 @@
 @openzeppelin/=node_modules/@openzeppelin/
-ds-test/=node_modules/ds-test/src
+@towns-protocol/=node_modules/@towns-protocol/
 forge-std/=node_modules/forge-std/src
-
-solady/=node_modules/solady
+solady/=node_modules/solady/
