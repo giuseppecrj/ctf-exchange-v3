@@ -15,7 +15,8 @@
     "test:coverage:report": "forge coverage --no-match-coverage '(test|scripts)' --report lcov && genhtml lcov.info --branch-coverage --output-dir coverage --rc derive_function_end_line=0"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^5.0.2"
+    "@openzeppelin/contracts": "^5.0.2",
+    "solady": "^0.1.26"
   },
   "devDependencies": {
     "forge-std": "github:foundry-rs/forge-std#v1.8.1",
