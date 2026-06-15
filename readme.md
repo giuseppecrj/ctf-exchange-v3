@@ -1,38 +1,96 @@
-# <h1 align="center"> Forge Template Base</h1>
+# CTF Exchange V3
 
-**Template repository for getting started quickly with Foundry projects**
+Solidity implementation of the Polymarket CTF exchange contracts, built with [Foundry](https://getfoundry.sh/).
 
-## Getting Started
+## Overview
 
-Click "Use this template" on [GitHub](https://github.com/giuseppecrj/forge-template-base) to create a new repository with this repo as the initial state.
+This repository contains exchange primitives for Conditional Tokens Framework (CTF) markets:
 
-## Writing your first test
+- `CTFExchange` entry point and initialization
+- admin/operator authorization helpers
+- asset configuration and CTF collateral references
+- order, signature, matching, and trading data structures
+- Polymarket proxy and Safe utility libraries
 
-All you need is to `import forge-std/Test.sol` and then inherit it from your test contract. Forge-std's Test contract comes with a pre-instatiated [cheatcodes environment](https://book.getfoundry.sh/cheatcodes/), the `vm`. It also has support for [ds-test](https://book.getfoundry.sh/reference/ds-test.html)-style logs and assertions. Finally, it supports Hardhat's [console.log](https://github.com/brockelmore/forge-std/blob/master/src/console.sol). The logging functionalities require `-vvvv`.
+## Repository layout
 
-```solidity
-pragma solidity 0.8.10;
-
-import "forge-std/Test.sol";
-
-contract ContractTest is Test {
-  function testExample() public {
-    vm.roll(100);
-    console.log(1);
-    emit log("hi");
-    assertTrue(true);
-  }
-}
+```text
+src/
+  CTFExchange.sol          Exchange entry point
+  Structs.sol              Shared exchange structs and enums
+  assets/                  Collateral, CTF, and outcome token configuration
+  auth/                    Admin/operator role management
+  pausable/                User pause support
+  trading/                 Trading interfaces and storage
+  utils/                   Signature, proxy, Safe, and CTF helper libraries
+scripts/                   Foundry deployment scripts
+test/                      Foundry tests and test utilities
 ```
 
-## Deployment
+## Requirements
 
-In order to deploy using make you can run
+- [Foundry](https://getfoundry.sh/)
+- Node.js package manager compatible with the lockfiles in this repo (`yarn` or `bun`)
+
+Install dependencies:
 
 ```bash
-make deploy-base contract=DeployHello
+yarn install
+# or
+bun install
 ```
 
 ## Development
 
-This project uses [Foundry](https://getfoundry.sh). See the [book](https://book.getfoundry.sh/getting-started/installation.html) for instructions on how to install and use Foundry.
+Build contracts:
+
+```bash
+yarn build
+# or
+forge build
+```
+
+Run tests:
+
+```bash
+yarn test
+# or
+forge test
+```
+
+Run formatting and lint checks:
+
+```bash
+yarn lint
+```
+
+Generate coverage:
+
+```bash
+yarn test:coverage
+```
+
+## Deployment
+
+Deployment scripts live in `scripts/`. The Makefile provides a generic script runner:
+
+```bash
+make deploy-any contract=DeployHello rpc=$RPC_URL private_key=$PRIVATE_KEY
+```
+
+Optional deployment context:
+
+```bash
+make deploy-any contract=DeployHello rpc=$RPC_URL private_key=$PRIVATE_KEY context=local
+```
+
+## Configuration
+
+Foundry configuration is in `foundry.toml`:
+
+- Solidity compiler: `0.8.33`
+- EVM version: `shanghai`
+- optimizer enabled with `10_000` runs
+- default fuzz runs: `1_000`
+
+RPC endpoints and explorer API keys are read from environment variables. Create a local `.env` file as needed; do not commit secrets.
