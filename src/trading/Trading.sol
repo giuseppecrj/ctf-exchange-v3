@@ -3,6 +3,7 @@ pragma solidity ^0.8.29;
 
 // interfaces
 import { ITrading } from "./ITrading.sol";
+import { IUserPausable } from "../pausable/IUserPausable.sol";
 
 // libraries
 import { CustomRevert } from "../utils/CustomRevert.sol";
@@ -10,6 +11,8 @@ import { Side, Order, ORDER_TYPEHASH } from "../Structs.sol";
 import { TradingStorage } from "./TradingStorage.sol";
 import { Signatures } from "../utils/Signatures.sol";
 import { CTHelpers } from "../utils/CTHelpers.sol";
+import { PausableStorage } from "../pausable/PaubleStorage.sol";
+import { AssetsStorage } from "../assets/AssetsStorage.sol";
 
 // contracts
 import { EIP712 } from "solady/src/utils/EIP712.sol";
@@ -17,6 +20,8 @@ import { EIP712 } from "solady/src/utils/EIP712.sol";
 abstract contract TradingBase is EIP712, ITrading {
     using CustomRevert for bytes4;
     using TradingStorage for TradingStorage.Storage;
+    using AssetsStorage for AssetsStorage.Storage;
+    using PausableStorage for PausableStorage.Storage;
     using Signatures for bytes32;
 
     struct PreparedMakerOrder {
@@ -40,6 +45,8 @@ abstract contract TradingBase is EIP712, ITrading {
         if ($.orderStatus[orderHash].filled) OrderAlreadyFilled.selector.revertWith();
 
         _validateOrder(orderHash, order);
+
+        if (PausableStorage.getStorage().isUserPaused(order.maker)) IUserPausable.UserIsPaused.selector.revertWith();
     }
 
     function matchOrders(
@@ -56,7 +63,7 @@ abstract contract TradingBase is EIP712, ITrading {
     // Internal
 
     function _validateTokenIds(bytes32 conditionId, Order memory takerOrder, Order[] memory makerOrders) internal view {
-        address col = getCtfCollateral();
+        address col = AssetsStorage.getStorage().getCtfCollateral();
         uint256 pos1 = CTHelpers.getPositionId(col, CTHelpers.getCollectionId(bytes32(0), conditionId, 1));
         uint256 pos2 = CTHelpers.getPositionId(col, CTHelpers.getCollectionId(bytes32(0), conditionId, 2));
 
@@ -92,7 +99,6 @@ abstract contract TradingBase is EIP712, ITrading {
 
     function _validateOrder(bytes32 orderHash, Order calldata order) internal view {
         // Validate order is not zero-sized
-        // require(order.makerAmount > 0, ZeroMakerAmount());
         if (order.makerAmount < 0) ZeroMakerAmount.selector.revertWith();
 
         Signatures.validate(orderHash, order);
